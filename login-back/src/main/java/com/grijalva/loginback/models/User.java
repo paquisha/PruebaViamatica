@@ -1,6 +1,7 @@
 package com.grijalva.loginback.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -24,6 +25,17 @@ public class User {
     private String username;
 
     @NotBlank
+    @Size(max = 20)
+    private String name;
+
+    @NotBlank
+    @Size(max = 20)
+    private String lastname;
+
+    @Digits(integer = 10, fraction = 0, message = "El número debe tener hasta 10 dígitos.")
+    private Integer ci;
+
+    @NotBlank
     @Size(max = 50)
     @Email
     private String email;
@@ -41,10 +53,37 @@ public class User {
     public User() {
     }
 
-    public User(String username, String email, String password) {
+    public User(String username, String name, String lastname, Integer ci, String email, String password) {
         this.username = username;
+        this.name = name;
+        this.lastname = lastname;
+        this.ci = ci;
         this.email = email;
         this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public int getCi() {
+        return ci;
+    }
+
+    public void setCi(int ci) {
+        this.ci = ci;
     }
 
     public Long getId() {

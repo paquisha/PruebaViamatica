@@ -14,16 +14,4 @@ public class LoginBackApplication {
 		SpringApplication.run(LoginBackApplication.class, args);
 	}
 
-
-	@Bean
-	public CorsFilter corsFilter() {
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		CorsConfiguration config = new CorsConfiguration();
-		config.addAllowedOrigin("*"); // Permitir todas las solicitudes desde cualquier origen
-		config.addAllowedMethod("*"); // Permitir todos los métodos HTTP
-		config.addAllowedHeader("*"); // Permitir todas las cabeceras
-		source.registerCorsConfiguration("/**", config);
-		return new CorsFilter(source);
-	}
-
 }

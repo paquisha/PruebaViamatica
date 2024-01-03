@@ -27,7 +27,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+
+
+//@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -46,6 +48,7 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
+    @CrossOrigin(origins = "http://localhost:8081", maxAge = 3600, allowCredentials="true")
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -69,6 +72,7 @@ public class AuthController {
                         roles));
     }
 
+    @CrossOrigin(origins = "http://localhost:8081", maxAge = 3600, allowCredentials="true")
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -80,9 +84,7 @@ public class AuthController {
         }
 
         // Create new user's account
-        User user = new User(signUpRequest.getUsername(),
-                signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+        User user = new User(signUpRequest.getUsername(),signUpRequest.getName(),signUpRequest.getLastname(),signUpRequest.getCi(),signUpRequest.getEmail(),encoder.encode(signUpRequest.getPassword()));
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -120,6 +122,7 @@ public class AuthController {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
+    @CrossOrigin(origins = "http://localhost:8081", maxAge = 3600, allowCredentials="true")
     @PostMapping("/signout")
     public ResponseEntity<?> logoutUser() {
         ResponseCookie cookie = jwtUtils.getCleanJwtCookie();

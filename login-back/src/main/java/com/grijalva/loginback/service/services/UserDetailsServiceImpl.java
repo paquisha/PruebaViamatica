@@ -1,4 +1,4 @@
-package com.grijalva.loginback.security.services;
+package com.grijalva.loginback.service.services;
 
 import com.grijalva.loginback.models.User;
 import com.grijalva.loginback.repository.UserRepository;

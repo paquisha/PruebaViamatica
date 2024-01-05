@@ -1,6 +1,6 @@
-package com.grijalva.loginback.security.jwt;
+package com.grijalva.loginback.service.jwt;
 
-import com.grijalva.loginback.security.services.UserDetailsServiceImpl;
+import com.grijalva.loginback.service.services.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

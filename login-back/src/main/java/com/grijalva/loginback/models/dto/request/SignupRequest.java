@@ -1,6 +1,5 @@
-package com.grijalva.loginback.payload.request;
+package com.grijalva.loginback.models.dto.request;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 
 import java.util.Set;

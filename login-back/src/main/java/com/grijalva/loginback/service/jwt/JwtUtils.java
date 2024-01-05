@@ -1,6 +1,6 @@
-package com.grijalva.loginback.security.jwt;
+package com.grijalva.loginback.service.jwt;
 
-import com.grijalva.loginback.security.services.UserDetailsImpl;
+import com.grijalva.loginback.service.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

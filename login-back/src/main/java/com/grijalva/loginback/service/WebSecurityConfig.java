@@ -1,8 +1,8 @@
-package com.grijalva.loginback.security;
+package com.grijalva.loginback.service;
 
-import com.grijalva.loginback.security.jwt.AuthEntryPointJwt;
-import com.grijalva.loginback.security.jwt.AuthTokenFilter;
-import com.grijalva.loginback.security.services.UserDetailsServiceImpl;
+import com.grijalva.loginback.service.jwt.AuthEntryPointJwt;
+import com.grijalva.loginback.service.jwt.AuthTokenFilter;
+import com.grijalva.loginback.service.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

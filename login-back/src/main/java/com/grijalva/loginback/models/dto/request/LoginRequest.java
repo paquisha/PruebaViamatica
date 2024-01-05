@@ -1,4 +1,4 @@
-package com.grijalva.loginback.payload.request;
+package com.grijalva.loginback.models.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 

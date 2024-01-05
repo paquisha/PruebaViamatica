@@ -1,4 +1,4 @@
-package com.grijalva.loginback.payload.response;
+package com.grijalva.loginback.models.dto.response;
 
 import java.util.List;
 

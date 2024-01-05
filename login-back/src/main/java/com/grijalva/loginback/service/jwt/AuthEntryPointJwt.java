@@ -1,4 +1,4 @@
-package com.grijalva.loginback.security.jwt;
+package com.grijalva.loginback.service.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;

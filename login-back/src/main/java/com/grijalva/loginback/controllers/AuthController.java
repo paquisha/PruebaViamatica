@@ -2,14 +2,14 @@ package com.grijalva.loginback.controllers;
 
 import com.grijalva.loginback.models.*;
 
-import com.grijalva.loginback.payload.request.LoginRequest;
-import com.grijalva.loginback.payload.request.SignupRequest;
-import com.grijalva.loginback.payload.response.MessageResponse;
-import com.grijalva.loginback.payload.response.UserInfoResponse;
+import com.grijalva.loginback.models.dto.request.LoginRequest;
+import com.grijalva.loginback.models.dto.request.SignupRequest;
+import com.grijalva.loginback.models.dto.response.MessageResponse;
+import com.grijalva.loginback.models.dto.response.UserInfoResponse;
 import com.grijalva.loginback.repository.RoleRepository;
 import com.grijalva.loginback.repository.UserRepository;
-import com.grijalva.loginback.security.jwt.JwtUtils;
-import com.grijalva.loginback.security.services.UserDetailsImpl;
+import com.grijalva.loginback.service.jwt.JwtUtils;
+import com.grijalva.loginback.service.services.UserDetailsImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

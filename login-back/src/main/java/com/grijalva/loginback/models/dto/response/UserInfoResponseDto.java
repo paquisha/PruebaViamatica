@@ -2,7 +2,7 @@ package com.grijalva.loginback.models.dto.response;
 
 import java.util.List;
 
-public class UserInfoResponse {
+public class UserInfoResponseDto {
     private Long id;
     private String username;
     private String name;
@@ -11,7 +11,7 @@ public class UserInfoResponse {
     private String email;
     private List<String> roles;
 
-    public UserInfoResponse(Long id, String username, String name, List<String> roles) {
+    public UserInfoResponseDto(Long id, String username, String name, List<String> roles) {
         this.id = id;
         this.username = username;
         this.name = name;

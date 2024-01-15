@@ -2,7 +2,7 @@ package com.grijalva.loginback.models.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class LoginRequest {
+public class LoginRequestDto {
     @NotBlank
     private String username;
 

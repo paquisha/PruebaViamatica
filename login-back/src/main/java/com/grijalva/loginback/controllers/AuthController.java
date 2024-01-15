@@ -2,10 +2,10 @@ package com.grijalva.loginback.controllers;
 
 import com.grijalva.loginback.models.*;
 
-import com.grijalva.loginback.models.dto.request.LoginRequest;
-import com.grijalva.loginback.models.dto.request.SignupRequest;
-import com.grijalva.loginback.models.dto.response.MessageResponse;
-import com.grijalva.loginback.models.dto.response.UserInfoResponse;
+import com.grijalva.loginback.models.dto.request.LoginRequestDto;
+import com.grijalva.loginback.models.dto.request.SignupRequestDto;
+import com.grijalva.loginback.models.dto.response.MessageResponseDto;
+import com.grijalva.loginback.models.dto.response.UserInfoResponseDto;
 import com.grijalva.loginback.repository.RoleRepository;
 import com.grijalva.loginback.repository.UserRepository;
 import com.grijalva.loginback.service.jwt.JwtUtils;
@@ -50,10 +50,10 @@ public class AuthController {
 
     @CrossOrigin(origins = "http://localhost:8081", maxAge = 3600, allowCredentials="true")
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequestDto loginRequestDto) {
 
         Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+                .authenticate(new UsernamePasswordAuthenticationToken(loginRequestDto.getUsername(), loginRequestDto.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -66,7 +66,7 @@ public class AuthController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-                .body(new UserInfoResponse(userDetails.getId(),
+                .body(new UserInfoResponseDto(userDetails.getId(),
                         userDetails.getUsername(),
                         userDetails.getEmail(),
                         roles));
@@ -74,19 +74,19 @@ public class AuthController {
 
     @CrossOrigin(origins = "http://localhost:8081", maxAge = 3600, allowCredentials="true")
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequestDto signUpRequestDto) {
+        if (userRepository.existsByUsername(signUpRequestDto.getUsername())) {
+            return ResponseEntity.badRequest().body(new MessageResponseDto("Error: Username is already taken!"));
         }
 
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+        if (userRepository.existsByEmail(signUpRequestDto.getEmail())) {
+            return ResponseEntity.badRequest().body(new MessageResponseDto("Error: Email is already in use!"));
         }
 
         // Create new user's account
-        User user = new User(signUpRequest.getUsername(),signUpRequest.getName(),signUpRequest.getLastname(),signUpRequest.getCi(),signUpRequest.getEmail(),encoder.encode(signUpRequest.getPassword()));
+        User user = new User(signUpRequestDto.getUsername(), signUpRequestDto.getName(), signUpRequestDto.getLastname(), signUpRequestDto.getCi(), signUpRequestDto.getEmail(),encoder.encode(signUpRequestDto.getPassword()));
 
-        Set<String> strRoles = signUpRequest.getRole();
+        Set<String> strRoles = signUpRequestDto.getRole();
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
@@ -119,7 +119,7 @@ public class AuthController {
         user.setRoles(roles);
         userRepository.save(user);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return ResponseEntity.ok(new MessageResponseDto("User registered successfully!"));
     }
 
     @CrossOrigin(origins = "http://localhost:8081", maxAge = 3600, allowCredentials="true")
@@ -127,6 +127,6 @@ public class AuthController {
     public ResponseEntity<?> logoutUser() {
         ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
-                .body(new MessageResponse("You've been signed out!"));
+                .body(new MessageResponseDto("You've been signed out!"));
     }
 }

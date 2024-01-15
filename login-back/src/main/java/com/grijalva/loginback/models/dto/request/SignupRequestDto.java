@@ -4,7 +4,7 @@ import jakarta.validation.constraints.*;
 
 import java.util.Set;
 
-public class SignupRequest {
+public class SignupRequestDto {
     @NotBlank
     @Size(min = 3, max = 20)
     private String username;
